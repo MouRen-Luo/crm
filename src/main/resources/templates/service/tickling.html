@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="main"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <title>服务处理</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="">
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>服务处理 <i class="fa fa-service"></i></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="clearfix"></div>
+                    <form class="form-horizontal form-label-left" th:action="@{/service/ticklingsave}" action="/service/save" method="post">
+                        <input type="hidden" th:value="${session.user.usrId}" name="svrDealId" id="svrDealId">
+                        <input type="hidden" th:value="${service.svrCustNo}" name="svrCustNo" id="svrCustNo">
+                        <input type="hidden" th:value="${service.svrCreateId}" name="svrCreateId" id="svrCreateId">
+                        <input type="hidden" th:value="${service.svrDeal}" name="svrDeal" id="svrDeal">
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="svrId"> 编号 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="svrId" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="svrId" required="required"
+                                       placeholder="请输入客户名称" type="text" readonly="readonly" th:value="${service.svrId}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="svrType"> 服务类型 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="svrType" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="svrType" required="required"
+                                       placeholder="请输入客户名称" type="text" readonly="readonly" th:value="${service.svrType}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="svrTitle"> 概要 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="svrTitle" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="svrTitle" required="required"
+                                       placeholder="请输入负责人" type="text" readonly="readonly" th:value="${service.svrTitle}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="svrCustName"> 客户 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="svrCustName" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="svrCustName" required="required"
+                                       placeholder="请输入机会来源" type="text" readonly="readonly" th:value="${service.svrCustName}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="svrStatus1"> 状态 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="svrStatus1" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="svrStatus1" required="required"
+                                       placeholder="请输入成功几率" type="text" readonly="readonly" th:value="${service.svrStatus}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="svrRequest"> 服务请求 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="svrRequest" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="svrRequest" required="required"
+                                       placeholder="请输入公司电话" type="text" readonly="readonly" th:value="${service.svrRequest}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="svrCreateBy"> 创建人 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="svrCreateBy" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="svrCreateBy" required="required"
+                                       placeholder="请输入概要" type="text" readonly="readonly" th:value="${service.svrCreateBy}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="svrCreateDate">创建时间 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="svrCreateDate" class="form-control col-md-7 col-xs-12"
+                                data-validate-length-range="10" data-validate-words="1" name="svrCreateDate" required="required"
+                                       readonly="readonly" th:value="${service.svrCreateDate}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="svrDueTo"> 分配给 <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="svrDueTo" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="svrDueTo" required="required"
+                                       readonly="readonly" th:value="${service.svrDueTo}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="svrDueDate"> 分配时间 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="svrDueDate" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="svrDueDate" required="required"
+                                       readonly="readonly" type="text" th:value="${service.svrDueDate}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="svrDealBy"> 处理人 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="svrDealBy" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="svrDealBy" required="required"
+                                       readonly="readonly" type="text" th:value="${session.user.usrName}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="svrDealDate"> 处理时间 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="svrDealDate" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="svrDealDate" required="required"
+                                       readonly="readonly" type="text" th:value="${date}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="svrResult"> 处理结果 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="svrResult" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="svrResult" required="required"
+                                        type="text">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="svrSatisfy"> 满意度 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="svrSatisfy" id="svrSatisfy" class="form-control" required="required">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-3">
+                                <button id="send" type="submit" class="btn btn-success">保存</button>
+                                <button type="button" class="btn btn-primary" id="back">返回</button>
+                                <br/><br/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+<script layout:fragment="js">
+    $(document).ready(function(){
+        $("#back").on("click",function(){
+            window.history.back();
+        });
+    });
+</script>
+</html>

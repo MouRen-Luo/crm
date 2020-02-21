@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="main"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <title>暂缓客户流失</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="">
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>暂缓客户流失 <i class="fa fa-lost"></i></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="clearfix"></div>
+                    <form class="form-horizontal form-label-left" th:action="@{/lost/save}" action="/lost/save" method="post">
+                        <input id="lstStatus" name="lstStatus" type="hidden" th:value="暂缓流失">
+                        <input id="lstCustNo" name="lstCustNo" type="hidden" th:value="${lost.lstCustNo}">
+                        <input id="lstCustManagerId" name="lstCustManagerId" type="hidden" th:value="${lost.lstCustManagerId}">
+                        <input id="lstLostDate" name="lstLostDate" type="hidden" th:value="${lost.lstLostDate}">
+                        <input id="lstReason" name="lstReason" type="hidden" th:value="${lost.lstReason}">
+                        <input id="dc" name="dc" type="hidden" value="defer">
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="lstId"> 编号 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="lstId" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="lstId" required="required"
+                                       placeholder="请输入客户名称" readonly="readonly"  type="text"  th:value="${lost.lstId}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="lstCustName"> 客户名称 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="lstCustName" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="lstCustName" required="required"
+                                       placeholder="请输入客户名称" readonly="readonly"  type="text" th:value="${lost.lstCustName}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="lstCustManagerName"> 客户经理 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="lstCustManagerName" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="lstCustManagerName" required="required"
+                                       placeholder="请输入负责人"  readonly="readonly" type="text" th:value="${lost.lstCustManagerName}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="lstLastOrderDate"> 上次下单时间 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="lstLastOrderDate" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="lstLastOrderDate" required="required"
+                                       placeholder="请输入机会来源" readonly="readonly"  type="text" th:value="${lost.lstLastOrderDate}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="lstDelay"> 暂缓措施 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="lstDelay" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="lstDelay" required="required"
+                                        readonly="readonly"  type="text" th:value="${lost.lstDelay}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="lstDelay2"> 追加暂缓措施 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea id="lstDelay2" class="form-control col-md-7 col-xs-12"
+                                          data-validate-length-range="10" data-validate-words="1" name="lstDelay2" required="required" value=""></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-3">
+                                <button id="send" type="submit" class="btn btn-success">保存</button>
+                                <button type="button" class="btn btn-primary" id="back">返回</button>
+                                <br/><br/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+<script layout:fragment="js">
+    $(document).ready(function(){
+        $("#back").on("click",function(){
+            window.history.back();
+        });
+    });
+</script>
+</html>

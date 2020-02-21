@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.w3.org/1999/xhtml" layout:decorate="main"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <title>服务处理</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>
+                            服务处理 <i class="fa fa-user"></i>
+                        </h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <form method="post" action="/user/list" th:action="@{/service/dealList}">
+                            <input type="hidden" name="pageIndex" value="1"/>
+                            <ul>
+                                <li>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">客户</label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input name="svrCustName1" type="text" th:value="${svrCustName}"
+                                                   class="form-control col-md-6 col-xs-12" value="">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">概要</label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input name="svrTitle1" type="text" th:value="${svrTitle}"
+                                                   class="form-control col-md-6 col-xs-12" value="">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">服务类型</label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select name="svrType1" id="svrType1" class="form-control">
+                                                <option value="">--请选择--</option>
+                                                <option th:selected="${di.dictItem eq svrType}" th:each="di:${di}" th:value="${di.dictItem}" th:text="${di.dictItem}" value="">角色</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <button type="submit" class="btn btn-primary"> 查 &nbsp;&nbsp;&nbsp;&nbsp;询</button>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <p class="text-muted font-13 m-b-30"></p>
+                        <div id="datatable-responsive_wrapper"
+                             class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="datatable-responsive"
+                                           class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed"
+                                           cellspacing="0" width="100%" role="grid"
+                                           aria-describedby="datatable-responsive_info" style="width: 100%;">
+                                        <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0"
+                                                aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                                                aria-label="First name: activate to sort column descending"
+                                                aria-sort="ascending">编号
+                                            </th>
+                                            <th class="sorting" tabindex="0"
+                                                aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                                                aria-label="Last name: activate to sort column ascending">
+                                                客户
+                                            </th>
+                                            <th class="sorting" tabindex="0"
+                                                     aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                                                     aria-label="Last name: activate to sort column ascending">
+                                                        服务类型
+                                            </th>
+                                            <th class="sorting" tabindex="0"
+                                                aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                                                aria-label="Last name: activate to sort column ascending">
+                                                创建人
+                                            </th>
+                                            <th class="sorting" tabindex="0"
+                                                aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                                                aria-label="Last name: activate to sort column ascending">
+                                                创建日期
+                                            </th>
+                                            <th class="sorting" tabindex="0"
+                                                aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                                                aria-label="Last name: activate to sort column ascending">
+                                                概要
+                                            </th>
+                                            <th class="sorting" tabindex="0"
+                                                aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                                                aria-label="Last name: activate to sort column ascending">
+                                                操作
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr role="row" class="odd" th:each="user:${serPager.content}">
+                                            <td tabindex="0" class="sorting_1" th:text="${user.svrId}">usrId</td>
+                                            <td th:text="${user.svrCustName}">usrName</td>
+                                            <td th:text="${user.svrType}">roleName</td>
+                                            <td th:text="${user.svrCreateBy}">usrName</td>
+                                            <td th:text="${user.svrCreateDate}">roleName</td>
+                                            <td th:text="${user.svrTitle}">usrName</td>
+                                            <td th:if="${user.svrStatus != '已处理'}">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-danger">点击操作</button>
+                                                    <button type="button" class="btn btn-danger dropdown-toggle"
+                                                            data-toggle="dropdown" aria-expanded="false">
+                                                        <span class="caret"></span>
+                                                        <span class="sr-only">Toggle Dropdown</span>
+                                                    </button>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a class="delInfo" id="del" href="#" th:href="@{/service/allot(svrId=${user.svrId})}"
+                                                               data-toggle="tooltip" data-placement="top" title=""
+                                                               data-original-title="删除">处理</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!--分页start-->
+                            <div class="col-sm-5">
+                                <div class="dataTables_info" id="datatable-responsive_info" role="status" aria-live="polite">共
+                                    <span th:text="${serPager.totalElements}">1</span>条记录
+                                    <span th:text="${serPager.number+1}">1</span>/<span th:text="${serPager.totalPages}">1</span>
+                                    页</div>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="datatable-responsive_paginate">
+                                    <ul class="pagination">
+                                        <li class="paginate_button previous" th:if="${serPager.number gt 0}">
+                                            <a href="javascript:page_nav(document.forms[0],1);"
+                                               aria-controls="datatable-responsive"
+                                               data-dt-idx="0" tabindex="0">首页</a>
+                                        </li>
+                                        <li class="paginate_button" th:if="${serPager.number gt 0}">
+                                            <a href="#" th:onclick="'javascript:page_nav(document.forms[0],'+${serPager.number}+');'"
+                                               aria-controls="datatable-responsive" data-dt-idx="1" tabindex="0">
+                                                上一页
+                                            </a>
+                                        </li>
+                                        <li class="paginate_button" th:if="${(serPager.number+1) lt serPager.totalPages}">
+                                            <a href="#" th:onclick="'javascript:page_nav(document.forms[0],'+${serPager.number+2}+');'"
+                                               aria-controls="datatable-responsive" data-dt-idx="1" tabindex="0">
+                                                下一页
+                                            </a>
+                                        </li>
+                                        <li class="paginate_button next" th:if="${(serPager.number+1) lt serPager.totalPages}">
+                                            <a href="#" th:onclick="'javascript:page_nav(document.forms[0],'+${serPager.totalPages}+');'"
+                                               aria-controls="datatable-responsive" data-dt-idx="7" tabindex="0">最后一页</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!--分页end-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+<script layout:fragment="js">
+</script>
+</html>

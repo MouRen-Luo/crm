@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="main"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <title>执行计划</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="">
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>执行计划 <i class="fa fa-plan"></i></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="clearfix"></div>
+                    <form class="form-horizontal form-label-left" th:action="@{/plan/save}" action="/plan/save" method="post">
+                        <input id="chcCreateBy" name="chcCreateBy" type="hidden" th:value="${plan.chcCreateBy}">
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="chcId"> 编号 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="chcId" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="chcId" required="required"
+                                       placeholder="请输入客户名称" type="text" readonly="readonly" th:value="${plan.chcId}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="chcCustName"> 客户名称 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="chcCustName" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="chcCustName" required="required"
+                                       placeholder="请输入客户名称" type="text" readonly="readonly" th:value="${plan.chcCustName}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="chcLinkman"> 负责人 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="chcLinkman" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="chcLinkman" required="required"
+                                       placeholder="请输入负责人" type="text" readonly="readonly" th:value="${plan.chcLinkman}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="chcSource"> 机会来源 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="chcSource" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="chcSource" required="required"
+                                       placeholder="请输入机会来源" type="text" readonly="readonly" th:value="${plan.chcSource}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="chcRate"> 成功几率(%) <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="chcRate" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="chcRate" required="required"
+                                       placeholder="请输入成功几率" type="text" readonly="readonly" th:value="${plan.chcRate}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="chcTel"> 公司电话 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="chcTel" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="chcTel" required="required"
+                                       placeholder="请输入公司电话" type="text" readonly="readonly" th:value="${plan.chcTel}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="chcTitle"> 概要 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="chcTitle" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="chcTitle" required="required"
+                                       placeholder="请输入概要" type="text" readonly="readonly" th:value="${plan.chcTitle}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="chcDesc">机会描述 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea id="chcDesc" class="form-control col-md-7 col-xs-12"
+                                data-validate-length-range="10" data-validate-words="1" name="chcDesc" required="required"
+                                placeholder="请输入机会描述" readonly="readonly" th:placeholder="${plan.chcDesc}"></textarea>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="chcDueDate"> 指派时间 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="chcDueDate" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="chcDueDate" required="required"
+                                       placeholder="请输入指派时间" type="text" readonly="readonly" th:value="${plan.chcDueDate}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="datatable-responsive"
+                                       class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed"
+                                       cellspacing="0" width="100%" role="grid"
+                                       aria-describedby="datatable-responsive_info" style="width: 100%;">
+                                    <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc" tabindex="0"
+                                            aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                                            aria-label="First name: activate to sort column descending"
+                                            aria-sort="ascending">日期
+                                        </th>
+                                        <th class="sorting" tabindex="0"
+                                            aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                                            aria-label="Last name: activate to sort column ascending">
+                                            计划项
+                                        </th>
+                                        <th class="sorting" tabindex="0"
+                                            aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                                            aria-label="Last name: activate to sort column ascending">
+                                            执行效果
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="dadd">
+                                    <tr role="row" class="odd" id="saltIp" th:each="plans:${plans}">
+                                        <input type="hidden" th:value="${plans.plachcId}" name="plachcId" id="plachcId">
+                                        <td tabindex="0"  class="sorting_1"><input type="text" id="plaDate" name="plaDate" th:value="${plans.plaDate}" readonly="readonly"></td>
+                                        <td><input type="text" id="plaTodo" name="plaTodo" th:value="${plans.plaTodo}" readonly="readonly"></td>
+                                        <td th:if="${plans.plaResult != null}"><input type="text" id="plaResult1" name="plaResult1" th:value="${plans.plaResult}" readonly="readonly"></td>
+                                        <td th:if="${plans.plaResult eq null}"><input type="text" id="plaResult" name="plaResult"><button type="button" class="btn btn-primary" id="dels" th:onclick="|save(this,${plans.plaId},${plans.plachcId})|">保存</button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="form-group">
+                            <div class="col-md-6 col-md-offset-3">
+                                <button type="button" class="btn btn-primary" id="cg" th:onclick="|kf(${chcId},1)|">开发成功</button>
+                                <button type="button" class="btn btn-primary" id="sb" th:onclick="|kf(${chcId},0)|">开发失败</button>
+                                <button type="button" class="btn btn-primary" id="back">返回</button>
+                                <br/><br/>
+                            </div>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+<script layout:fragment="js">
+    $(document).ready(function(){
+        $("#back").on("click",function(){
+            window.history.back();
+        });
+    });
+
+    function kf(chcId,num) {
+        alert("进来了");
+        $.ajax({
+            type:"GET",
+            url:"/plan/kf",
+            data:"chcId="+chcId,
+            dataType:"json",
+            success:function(data){
+                if(data.delResult == "true"){
+                    if(num==1){
+                        alert("开发成功，已归档");
+                    }else if(num==0){
+                        alert("开发失败，已归档");
+                    }
+                    window.location.href = "/plan/list";
+                }
+
+            },
+        })
+    }
+
+    function save(obj,plaId,plachcId) {
+        var plaResult = 'no';
+        $.ajax({
+            type:"GET",
+            url:"/plan/saveo",
+            data:{"plaId":plaId,"plaResult":plaResult},
+            dataType:"json",
+            success:function(data){
+                if(data.delResult == "true"){//删除成功：移除删除行e
+                    alert("保存成功");
+                    window.location.href="/plan/assign?chcId="+plachcId;
+                }else{
+                    alert("保存失败");
+                }
+            },
+        })
+    }
+</script>
+</html>

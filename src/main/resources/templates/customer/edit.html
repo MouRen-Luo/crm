@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="main"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <title>修改销售机会</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="">
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>修改销售机会 <i class="fa fa-cus"></i></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="clearfix"></div>
+                    <form class="form-horizontal form-label-left" th:action="@{/customer/save}" action="/cus/save" method="post">
+                        <input id="custId" name="custId" type="hidden" th:value="${cus.custId}">
+                        <input id="custStatus" name="custStatus" type="hidden" th:value="${cus.custStatus}">
+                        <input id="custLevel" name="custLevel" type="hidden" th:value="${cus.custLevel}">
+                        <input id="custManagerId" name="custManagerId" type="hidden" th:value="${cus.custManagerId}">
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="custName"> 客户名称 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="custName" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="custName" required="required"
+                                       placeholder="请输入客户名称" type="text"  th:value="${cus.custName}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="custNo"> 客户编号 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="custNo" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="custNo" required="required"
+                                       placeholder="请输入客户名称" type="text" th:value="${cus.custNo}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="custManagerName"> 负责人 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="custManagerName" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="custManagerName" required="required"
+                                       placeholder="请输入负责人" type="text" th:value="${cus.custManagerName}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="custAddr"> 地址 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="custAddr" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="custAddr" required="required"
+                                       placeholder="请输入机会来源" type="text" th:value="${cus.custAddr}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="custZip"> 邮政编码 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="custZip" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="custZip" required="required"
+                                       placeholder="请输入成功几率" type="text" th:value="${cus.custZip}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="custTel"> 电话 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="custTel" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="custTel" required="required"
+                                       placeholder="请输入公司电话" type="text" th:value="${cus.custTel}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="dictItem"> 客户等级 <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="dict.dictItem" id="dictItem" class="form-control" required="required">
+                                    <option th:selected="${cus.custLevelLabel eq dict.dictItem}" th:each="dict:${dicts}" th:value="${dict.dictItem}" th:text="${dict.dictItem}" value="">客户等级</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="custFax"> 传真 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="custFax" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="custFax" required="required"
+                                       placeholder="请输入概要" type="text" th:value="${cus.custFax}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="dictItem2"> 地区 <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="dictb.dictItem" id="dictItem2" class="form-control" required="required">
+                                    <option th:selected="${cus.custRegion eq dictb.dictItem}"  th:each="dictb:${dictb}" th:value="${dictb.dictItem}" th:text="${dictb.dictItem}" value="">地区</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="custWebsite">网址 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea id="custWebsite" class="form-control col-md-7 col-xs-12"
+                                data-validate-length-range="10" data-validate-words="1" name="custWebsite" required="required"
+                                placeholder="请输入机会描述" th:placeholder="${cus.custWebsite}"></textarea>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="custCredit"> 客户信誉度 <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="custCredit" id="custCredit" class="form-control" required="required">
+                                    <option th:selected="${cus.custCredit eq '1'}"   th:value="1">1</option>
+                                    <option th:selected="${cus.custCredit eq '2'}"  th:value="2">2</option>
+                                    <option th:selected="${cus.custCredit eq '3'}"  th:value="3">3</option>
+                                    <option th:selected="${cus.custCredit eq '4'}" th:value="4">4</option>
+                                    <option th:selected="${cus.custCredit eq '5'}" th:value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="custSatisfy"> 客户满意度 <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="custSatisfy" id="custSatisfy" class="form-control" required="required">
+                                    <option th:selected="${cus.custSatisfy eq '1'}"   th:value="1">1</option>
+                                    <option th:selected="${cus.custSatisfy eq '2'}"  th:value="2">2</option>
+                                    <option th:selected="${cus.custSatisfy eq '3'}"  th:value="3">3</option>
+                                    <option th:selected="${cus.custSatisfy eq '4'}" th:value="4">4</option>
+                                    <option th:selected="${cus.custSatisfy eq '5'}" th:value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="custLicenceNo"> 营业执照注册号 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="custLicenceNo" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="custLicenceNo" required="required"
+                                       placeholder="请输入指派时间" type="text" th:value="${cus.custLicenceNo}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="custChieftain"> 法人 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="custChieftain" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="custChieftain" required="required"
+                                       placeholder="请输入指派时间" type="text" th:value="${cus.custChieftain}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="custBankroll"> 注册资金（万） <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="custBankroll" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="custBankroll" required="required"
+                                       placeholder="请输入指派时间" type="text" th:value="${cus.custBankroll}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="custTurnover"> 年营业额 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="custTurnover" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="custTurnover" required="required"
+                                       placeholder="请输入指派时间" type="text" th:value="${cus.custTurnover}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="custBank"> 开户银行 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="custBank" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="custBank" required="required"
+                                       placeholder="请输入指派时间" type="text" th:value="${cus.custBank}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="custBankAccount"> 银行账号 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="custBankAccount" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="custBankAccount" required="required"
+                                       placeholder="请输入指派时间" type="text" th:value="${cus.custBankAccount}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="custLocalTaxNo"> 地税登记号 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="custLocalTaxNo" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="custLocalTaxNo" required="required"
+                                       placeholder="请输入指派时间" type="text" th:value="${cus.custLocalTaxNo}">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="custNationalTaxNo"> 国税登记号 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="custNationalTaxNo" class="form-control col-md-7 col-xs-12"
+                                       data-validate-length-range="10" data-validate-words="1" name="custNationalTaxNo" required="required"
+                                       placeholder="请输入指派时间" type="text" th:value="${cus.custNationalTaxNo}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-3">
+                                <button id="send" type="submit" class="btn btn-success">保存</button>
+                                <button type="button" class="btn btn-primary" id="back">返回</button>
+                                <br/><br/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+<script layout:fragment="js">
+    $(document).ready(function(){
+        $("#back").on("click",function(){
+            window.history.back();
+        });
+    });
+</script>
+</html>

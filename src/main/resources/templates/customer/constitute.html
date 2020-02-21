@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.w3.org/1999/xhtml" layout:decorate="main"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <title>客户信息管理</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>
+                            客户信息管理 <i class="fa fa-customer"></i>
+                            <small>
+                                - 您可以通过搜索或者其他的筛选项对客户的信息进行编辑、删除等管理操作。^_^
+                            </small>
+                        </h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <form method="post" action="/customer/constitute" th:action="@{/customer/constitute}">
+                            <input type="hidden" name="pageIndex" value="1"/>
+                            <input type="hidden" name="dictType" value="客户等级">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content">
+
+                        <p class="text-muted font-13 m-b-30"></p>
+                        <div id="datatable-responsive_wrapper"
+                             class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <a href="downExcel" th:href="@{/downExcel(index=2)}"
+                                       class="btn btn-success btn-sm">Excel</a>
+                                    <a href="downExcel" th:href="@{/helloPdf(index=2)}"
+                                       class="btn btn-success btn-sm">PDF</a>
+                                    <table id="datatable-responsive"
+                                           class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed"
+                                           cellspacing="0" width="100%" role="grid"
+                                           aria-describedby="datatable-responsive_info" style="width: 100%;">
+                                        <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0"
+                                                aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                                                aria-label="First name: activate to sort column descending"
+                                                aria-sort="ascending">编号
+                                            </th>
+                                            <th class="sorting" tabindex="0"
+                                                aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                                                aria-label="Last name: activate to sort column ascending">
+                                                客户名称
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr role="row" class="odd" th:each="customer:${conPager.content}">
+                                            <td tabindex="0" class="sorting_1" th:text="${customer.dictId}">custId</td>
+                                            <td th:text="${customer.dictItem}">custName</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!--分页start-->
+                            <div class="col-sm-5">
+                                <div class="dataTables_info" id="datatable-responsive_info" role="status" aria-live="polite">共
+                                    <span th:text="${conPager.totalElements}">1</span>条记录
+                                    <span th:text="${conPager.number+1}">1</span>/<span th:text="${conPager.totalPages}">1</span>
+                                    页</div>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="datatable-responsive_paginate">
+                                    <ul class="pagination">
+                                        <li class="paginate_button previous" th:if="${conPager.number gt 0}">
+                                            <a href="javascript:page_nav(document.forms[0],1);"
+                                               aria-controls="datatable-responsive"
+                                               data-dt-idx="0" tabindex="0">首页</a>
+                                        </li>
+                                        <li class="paginate_button" th:if="${conPager.number gt 0}">
+                                            <a href="#" th:onclick="'javascript:page_nav(document.forms[0],'+${conPager.number}+');'"
+                                               aria-controls="datatable-responsive" data-dt-idx="1" tabindex="0">
+                                                上一页
+                                            </a>
+                                        </li>
+                                        <li class="paginate_button" th:if="${(conPager.number+1) lt conPager.totalPages}">
+                                            <a href="#" th:onclick="'javascript:page_nav(document.forms[0],'+${conPager.number+2}+');'"
+                                               aria-controls="datatable-responsive" data-dt-idx="1" tabindex="0">
+                                                下一页
+                                            </a>
+                                        </li>
+                                        <li class="paginate_button next" th:if="${(conPager.number+1) lt conPager.totalPages}">
+                                            <a href="#" th:onclick="'javascript:page_nav(document.forms[0],'+${conPager.totalPages}+');'"
+                                               aria-controls="datatable-responsive" data-dt-idx="7" tabindex="0">最后一页</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!--分页end-->
+                        </div>
+                    </div>
+                </div><div id="main" style="height:500px"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script layout:fragment="js">
+    $(function() {
+        $.ajax({
+            url: "/consti",
+            success: function (result) {
+                // [{"id":1,"name":"普通客户","value":2},{"id":2,"name":"重点开发客户","value":1},{"id":3,"name":"大客户","value":1},{"id":4,"name":"合作伙伴","value":1},{"id":5,"name":"战略合作伙伴","value":1},{"id":6,"name":"究极BOSS","value":0}]
+                var data = result['value'];
+                var dataTitle = result['name'];
+                // dataTitle=["普通客户","重点开发客户","大客户","合作伙伴","战略合作伙伴","究极BOSS"]
+                $("#static").html(result['bq']);
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = echarts.init(document.getElementById('main'));
+
+                var option = {
+                    tooltip: {
+                        show: true
+                    },
+                    legend: {
+                        data:['销量']
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            data : dataTitle
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value'
+                        }
+                    ],
+                    series : [
+                        {
+                            "name":"销量",
+                            "type":"bar",
+                            "data":data
+                        }
+                    ]
+                };
+
+                // 为echarts对象加载数据
+                myChart.setOption(option);
+            },
+            type: "get",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+        });
+    });
+</script>
+</html>

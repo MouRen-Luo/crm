@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.w3.org/1999/xhtml" layout:decorate="main"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <title>销售机会管理</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>
+                            销售机会管理 <i class="fa fa-chance"></i>
+                            <small>
+                                - 您可以通过搜索或者其他的筛选项对用户的信息进行编辑、删除等管理操作。^_^
+                            </small>
+                        </h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                    </div>
+                    <a href="/chance/add" th:href="@{/tel/add}"
+                       class="btn btn-success btn-sm">新增用户信息</a>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <p class="text-muted font-13 m-b-30"></p>
+                        <div id="datatable-responsive_wrapper"
+                             class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="datatable-responsive"
+                                           class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed"
+                                           cellspacing="0" width="100%" role="grid"
+                                           aria-describedby="datatable-responsive_info" style="width: 100%;">
+                                        <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0"
+                                                aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                                                aria-label="First name: activate to sort column descending"
+                                                aria-sort="ascending">姓名
+                                            </th>
+                                            <th class="sorting" tabindex="0"
+                                                aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                                                aria-label="Last name: activate to sort column ascending">
+                                                性别
+                                            </th>
+                                            <th class="sorting" tabindex="0"
+                                                aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                                                aria-label="Last name: activate to sort column ascending">
+                                                职位
+                                            </th>
+                                            <th class="sorting" tabindex="0"
+                                                aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                                                aria-label="Last name: activate to sort column ascending">
+                                                办公电话
+                                            </th>
+                                            <th class="sorting" tabindex="0"
+                                                aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                                                aria-label="Last name: activate to sort column ascending">
+                                                手机
+                                            </th>
+                                            <th class="sorting" tabindex="0"
+                                                aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                                                aria-label="Last name: activate to sort column ascending">
+                                                备注
+                                            </th>
+                                            <th class="sorting" tabindex="0"
+                                                aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                                                aria-label="Last name: activate to sort column ascending">
+                                                操作
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr role="row" class="odd" th:each="lin:${lin}">
+                                            <td tabindex="0" class="sorting_1" th:text="${lin.lkmCustName}">chcId</td>
+                                            <td th:text="${lin.lkmSex}">chcCustName</td>
+                                            <td th:text="${lin.lkmPostion}">chcLinkman</td>
+                                            <td th:text="${lin.lkmTel}">chcTel</td>
+                                            <td th:text="${lin.lkmMobile}">chcTel</td>
+                                            <td th:text="${lin.lkmMemo}">chcTitle</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-danger">点击操作</button>
+                                                    <button type="button" class="btn btn-danger dropdown-toggle"
+                                                            data-toggle="dropdown" aria-expanded="false">
+                                                        <span class="caret"></span>
+                                                        <span class="sr-only">Toggle Dropdown</span>
+                                                    </button>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a class="editInfo" href="/chance/edit?usrId=1" th:href="@{/linkman/edit(lkmId=${lin.lkmId})}"
+                                                               data-toggle="tooltip" data-placement="top" title=""
+                                                               data-original-title="编辑">编辑</a></li>
+                                                        <li><a class="delInfo" id="del" href="#" th:onclick="|doDel(this,${lin.lkmId})|"
+                                                               data-toggle="tooltip" data-placement="top" title=""
+                                                               data-original-title="删除">删除</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+<script layout:fragment="js">
+
+    $(document).ready(function(){
+        $("#back").on("click",function(){
+            window.history.back();
+        });
+    });
+
+    function doDel(obj,lkmId){
+        if(confirm("你确定需要删除该联系吗？")){
+            $.ajax({
+                type:"GET",
+                url:"/linkman/del",
+                data:"lkmId="+lkmId,
+                dataType:"json",
+                success:function(data){
+                    if(data.delResult == "true"){//删除成功：移除删除行e
+                        alert("删除成功");
+                        $(obj).parents("tr").remove();
+                    }
+                },
+                error:function(data){
+                    alert("对不起，删除失败");
+                }
+            });
+        }
+    }
+</script>
+</html>

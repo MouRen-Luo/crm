@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../static/js/echarts.js"></script>
+</head>
+<body>
+<div id="main" style="height:400px"></div>
+<script>
+    var data = [{"id":1,"name":"普通客户","value":2},{"id":2,"name":"重点开发客户","value":1},{"id":3,"name":"大客户","value":1},{"id":4,"name":"合作伙伴","value":1},{"id":5,"name":"战略合作伙伴","value":1},{"id":6,"name":"究极BOSS","value":0}]
+
+    var dataTitle = dataTitle=["普通客户","重点开发客户","大客户","合作伙伴","战略合作伙伴","究极BOSS"]
+    var myChart = echarts.init(document.getElementById('main'));
+option = {
+title : {
+text: '某站点用户访问来源',
+subtext: '纯属虚构',
+x:'center'
+},
+tooltip : {
+trigger: 'item',
+formatter: "{a} <br/>{b} : {c} ({d}%)"
+},
+legend: {
+orient : 'vertical',
+x : 'left',
+data:dataTitle
+},
+toolbox: {
+show : true,
+feature : {
+mark : {show: true},
+dataView : {show: true, readOnly: false},
+restore : {show: true},
+saveAsImage : {show: true}
+}
+},
+calculable : true,
+series : [
+{
+name:'访问来源',
+type:'pie',
+radius : '55%',
+center: ['50%', '60%'],
+data:data
+}
+]
+};
+    myChart.setOption(option);
+</script>
+</body>
+</html>
